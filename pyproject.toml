@@ -47,7 +47,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.8, <4"
 fastapi = "*"
 aiofiles = "*"
 anyio = "*"
@@ -69,10 +69,7 @@ python-multipart = "*"
 SQLAlchemy = "*"
 tortoise-orm = "*"
 types-setuptools = "*"
-mkdocs = "*"
-mkdocs-material = "*"
 markdown-include = "*"
-mkdocstrings = "*"
 
 [tool.semantic_release]
 version_variable = [
