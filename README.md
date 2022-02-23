@@ -10,13 +10,13 @@
 
 > Original work: https://github.com/mongkok/fastapi-debug-toolbar
 
-## Installation
+### Installation
 
 ```sh
 pip install fastapi-toolbar
 ```
 
-## Quickstart
+### Quickstart
 
 Add `DebugToolbarMiddleware` middleware to your FastAPI application:
 
@@ -28,7 +28,7 @@ app = FastAPI(debug=True)
 app.add_middleware(DebugToolbarMiddleware)
 ```
 
-## SQLAlchemy
+### SQLAlchemy
 
 Please make sure to use the *"Dependency Injection"* system as described in the [FastAPI docs](https://fastapi.tiangolo.com/tutorial/sql-databases/#create-a-dependency) and add the `SQLAlchemyPanel` to your panel list:
 
@@ -71,7 +71,7 @@ app.add_middleware(
 )
 ```
 
-## Tortoise ORM
+### Tortoise ORM
 
 Add the `TortoisePanel` to your panel list:
 
