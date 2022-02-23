@@ -3,10 +3,10 @@ install:
 	@poetry run pre-commit install -f
 
 test:
-	@poetry run pytest -v -x -p no:warnings --cov-report term-missing --cov=./stela
+	@poetry run pytest -v -x -p no:warnings --cov-report term-missing --cov=./debug_toolbar
 
 ci:
-	@poetry run pytest --cov=./stela
+	@poetry run pytest --cov=./debug_toolbar
 
 format:
 	@poetry run black .
