@@ -82,7 +82,10 @@ class DebugToolbarMiddleware(BaseHTTPMiddleware):
         ):
             return response
 
-        await toolbar.record_stats(response)
+        try:
+            await toolbar.record_stats(response)
+        except Exception:
+            return response
         await toolbar.record_server_timing(response)
         toolbar.generate_server_timing_header(response)
 
