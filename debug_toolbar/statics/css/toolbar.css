@@ -606,7 +606,7 @@
 
 #ProfilingPanel .fastDebugPanelContent,
 #ProfilingPanel .fastDebugPanelContent .fastdt-scroll {
-    padding: 0; 
+    padding: 0;
 }
 iframe#profilingContent {
     width: 100%;

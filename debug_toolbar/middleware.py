@@ -6,19 +6,20 @@ import typing as t
 from concurrent.futures import ThreadPoolExecutor
 from urllib import parse
 
-from debug_toolbar.api import render_panel
-from debug_toolbar.settings import DebugToolbarSettings
-from debug_toolbar.toolbar import DebugToolbar
-from debug_toolbar.utils import import_string
 from fastapi import APIRouter, HTTPException, Request, Response, status
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import (
     BaseHTTPMiddleware,
-    RequestResponseEndpoint,
     DispatchFunction,
+    RequestResponseEndpoint,
 )
 from starlette.routing import NoMatchFound
 from starlette.types import ASGIApp
+
+from debug_toolbar.api import render_panel
+from debug_toolbar.settings import DebugToolbarSettings
+from debug_toolbar.toolbar import DebugToolbar
+from debug_toolbar.utils import import_string
 
 
 def show_toolbar(request: Request, settings: DebugToolbarSettings) -> bool:

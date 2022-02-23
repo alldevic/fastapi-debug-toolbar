@@ -1,12 +1,10 @@
+import logging
 import typing as t
 from importlib import import_module
 from time import perf_counter
 
 from fastapi import Request, Response
-from fastapi.dependencies.utils import (
-    solve_dependencies,
-    is_gen_callable,
-)
+from fastapi.dependencies.utils import is_gen_callable, solve_dependencies
 from fastapi.routing import APIRoute
 from sqlalchemy import event
 from sqlalchemy.engine import Connection, Engine
@@ -70,8 +68,8 @@ class SQLAlchemyPanel(SQLPanel):
                     dependant=route.dependant,
                     dependency_overrides_provider=route.dependency_overrides_provider,
                 )
-            except Exception:
-                pass
+            except Exception as error:
+                logging.debug(f"Error while solving dependencies: {error}")
             else:
                 for value in solved_result[0].values():
                     if isinstance(value, Session):

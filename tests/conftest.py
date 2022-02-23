@@ -6,6 +6,7 @@ from fastapi.responses import HTMLResponse
 
 from debug_toolbar.middleware import DebugToolbarMiddleware
 from debug_toolbar.toolbar import DebugToolbar
+
 from .templates import Jinja2Templates
 from .testclient import TestClient
 
@@ -19,7 +20,9 @@ def settings() -> t.Dict[str, t.Any]:
 async def app(settings: t.Dict[str, t.Any]) -> FastAPI:
     settings.setdefault("default_panels", [])
     settings.setdefault("disable_panels", [])
-    settings.setdefault("session_generators", ["tests.panels.sqlalchemy.conftest:get_db"])
+    settings.setdefault(
+        "session_generators", ["tests.panels.sqlalchemy.conftest:get_db"]
+    )
     DebugToolbar._panel_classes = None
 
     _app = FastAPI(debug=True)

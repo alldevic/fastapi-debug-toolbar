@@ -3,7 +3,7 @@ import json
 import re
 import typing as t
 from collections import defaultdict
-from datetime import datetime, date
+from datetime import date, datetime
 from uuid import UUID
 
 import sqlparse

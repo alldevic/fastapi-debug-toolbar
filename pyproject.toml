@@ -3,18 +3,17 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "fastapi-debug-toolbar"
+name = "fastapi-toolbar"
 version = "0.2.1"
 description = "A debug toolbar for FastAPI."
 license = "BSD"
-authors = ["Dani <dani@domake.io>"]
+authors = ["Dani <dani@domake.io>", "Chris Maillefaud <chrismaillefaud@gmail.com>"]
 readme = "README.md"
 include = ["LICENSE", "README.md"]
 keywords = ["fastapi", "debug", "profiling"]
 
-homepage = "https://github.com/mongkok/fastapi-debug-toolbar"
-repository = "https://github.com/mongkok/fastapi-debug-toolbar"
-documentation = "https://fastapi-debug-toolbar.domake.io"
+homepage = "https://github.com/chrismaille/fastapi-toolbar"
+repository = "https://github.com/chrismaille/fastapi-toolbar"
 
 packages = [
     { include = "debug_toolbar" },
@@ -74,6 +73,16 @@ mkdocs = "*"
 mkdocs-material = "*"
 markdown-include = "*"
 mkdocstrings = "*"
+
+[tool.semantic_release]
+version_variable = [
+    "debug_toolbar/__init__.py:__version__",
+    "pyproject.toml:version"
+]
+branch = "main"
+upload_to_pypi = true
+upload_to_release = true
+build_command = "python -m pip install -U twine poetry && poetry build"
 
 [tool.black]
 extend-exclude = '''
