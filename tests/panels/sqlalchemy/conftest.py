@@ -18,6 +18,7 @@ def get_db() -> t.Generator:
         yield db
     finally:
         db.close()
+        Base.metadata.create_all(bind=engine)
 
 
 @pytest.fixture

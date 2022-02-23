@@ -3,18 +3,17 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "fastapi-debug-toolbar"
+name = "fastapi-toolbar"
 version = "0.2.1"
 description = "A debug toolbar for FastAPI."
 license = "BSD"
-authors = ["Dani <dani@domake.io>"]
+authors = ["Dani <dani@domake.io>", "Chris Maillefaud <chrismaillefaud@gmail.com>"]
 readme = "README.md"
 include = ["LICENSE", "README.md"]
 keywords = ["fastapi", "debug", "profiling"]
 
-homepage = "https://github.com/mongkok/fastapi-debug-toolbar"
-repository = "https://github.com/mongkok/fastapi-debug-toolbar"
-documentation = "https://fastapi-debug-toolbar.domake.io"
+homepage = "https://github.com/chrismaille/fastapi-toolbar"
+repository = "https://github.com/chrismaille/fastapi-toolbar"
 
 packages = [
     { include = "debug_toolbar" },
@@ -48,14 +47,13 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
-
-fastapi = ">= 0.62.0"
-aiofiles = ">= 0.2.1"
-anyio = ">= 3.0.0"
-Jinja2 = ">= 2.9"
-pyinstrument = ">= 3.0.0"
-sqlparse = ">= 0.2.0"
+python = ">=3.8, <4"
+fastapi = "*"
+aiofiles = "*"
+anyio = "*"
+Jinja2 = "*"
+pyinstrument = "*"
+sqlparse = "*"
 
 [tool.poetry.dev-dependencies]
 black = "*"
@@ -69,13 +67,19 @@ pytest-asyncio = "*"
 pytest-cov = "*"
 python-multipart = "*"
 SQLAlchemy = "*"
-tortoise-orm = "0.15.19"
+tortoise-orm = "*"
 types-setuptools = "*"
-
-mkdocs = "*"
-mkdocs-material = "*"
 markdown-include = "*"
-mkdocstrings = "*"
+
+[tool.semantic_release]
+version_variable = [
+    "debug_toolbar/__init__.py:__version__",
+    "pyproject.toml:version"
+]
+branch = "main"
+upload_to_pypi = true
+upload_to_release = true
+build_command = "python -m pip install -U twine poetry && poetry build"
 
 [tool.black]
 extend-exclude = '''

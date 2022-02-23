@@ -25,6 +25,9 @@ class DebugToolbarSettings(BaseSettings):
             "want included in the toolbar."
         ),
     )
+    SESSION_GENERATORS: t.List[str] = Field(
+        [], description="Add full Python path for database session generators here."
+    )
     PANELS: t.List[str] = Field(
         [],
         description=(
@@ -47,7 +50,7 @@ class DebugToolbarSettings(BaseSettings):
         ),
     )
     JINJA_ENV: Environment = Field(
-        Environment(),
+        Environment(autoescape=True),
         description="The Jinja environment instance used to render the toolbar.",
     )
     JINJA_LOADERS: t.List[BaseLoader] = Field(

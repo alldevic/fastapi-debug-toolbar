@@ -8,7 +8,11 @@ from urllib import parse
 
 from fastapi import APIRouter, HTTPException, Request, Response, status
 from fastapi.staticfiles import StaticFiles
-from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
+from starlette.middleware.base import (
+    BaseHTTPMiddleware,
+    DispatchFunction,
+    RequestResponseEndpoint,
+)
 from starlette.routing import NoMatchFound
 from starlette.types import ASGIApp
 
@@ -26,8 +30,10 @@ def show_toolbar(request: Request, settings: DebugToolbarSettings) -> bool:
 
 
 class DebugToolbarMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app: ASGIApp, **settings: t.Any) -> None:
-        super().__init__(app)
+    def __init__(
+        self, app: ASGIApp, dispatch: DispatchFunction = None, **settings: t.Any
+    ) -> None:
+        super().__init__(app, dispatch)
         self.settings = DebugToolbarSettings(**settings)
         self.show_toolbar = import_string(self.settings.SHOW_TOOLBAR_CALLBACK)
         self.router: APIRouter = app  # type: ignore
@@ -81,9 +87,15 @@ class DebugToolbarMiddleware(BaseHTTPMiddleware):
         toolbar.generate_server_timing_header(response)
 
         if is_html:
+            old_body = None
             async for body in response.body_iterator:  # type: ignore
                 if not isinstance(body, bytes):
                     body = body.encode(response.charset)
+                if body:
+                    old_body = body
+                else:
+                    body = old_body
+                    break
 
             decoded = body.decode(response.charset)
             pattern = re.escape(self.settings.INSERT_BEFORE)
