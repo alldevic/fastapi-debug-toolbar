@@ -79,7 +79,7 @@ const $$ = {
         });
     },
     truncatechars(text, n) {
-        return (text.length > n) ? `${text.slice(0, n)}...` : text;
+        return (text && text.length > n) ? `${text.slice(0, n)}...` : text;
     },
 };
 
