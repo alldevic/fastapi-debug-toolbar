@@ -50,7 +50,7 @@ class DebugToolbarSettings(BaseSettings):
         ),
     )
     JINJA_ENV: Environment = Field(
-        Environment(autoescape=True),
+        Environment(),
         description="The Jinja environment instance used to render the toolbar.",
     )
     JINJA_LOADERS: t.List[BaseLoader] = Field(
